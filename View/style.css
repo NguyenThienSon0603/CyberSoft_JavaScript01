@@ -10,3 +10,14 @@
 .shadow-custom{
     box-shadow: 0 0 20px 0 #00000021;
 }
+
+main section{
+    display: none;
+}
+main section.active{
+    display: block;
+}
+#menuBaiTap .active{
+    @apply
+    bg-red-300 
+}

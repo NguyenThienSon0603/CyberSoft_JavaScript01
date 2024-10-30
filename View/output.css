@@ -844,6 +844,19 @@ video {
   box-shadow: 0 0 20px 0 #00000021;
 }
 
+main section{
+  display: none;
+}
+
+main section.active{
+  display: block;
+}
+
+#menuBaiTap .active {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-orange-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(253 186 116 / var(--tw-bg-opacity));
