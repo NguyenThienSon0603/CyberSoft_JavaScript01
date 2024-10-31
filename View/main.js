@@ -1,32 +1,37 @@
-const baitap01 = document.getElementById('baitap01');
-const baitap02 = document.getElementById('baitap02');
-const baitap03 = document.getElementById('baitap03');
-const baitap04 = document.getElementById('baitap04');
-const btnBaiTap01 = document.getElementById('btnBaiTap01');
-const btnBaiTap02 = document.getElementById('btnBaiTap02');
-const btnBaiTap03 = document.getElementById('btnBaiTap03');
-const btnBaiTap04 = document.getElementById('btnBaiTap04');
+const showBaiTap = document.querySelectorAll('main section');
+const btnActive = document.querySelectorAll('#menuBaiTap div div');
 
+btnActive.forEach((item, index) => {
+    item.addEventListener('click', ()=>{
+        // button được click sẽ add class active và thay đổi icon book
+        item.classList.toggle('active');
 
-btnBaiTap01.onclick = () => {
-    document.getElementById('baitap01').classList.toggle('active');
-    removeActive(baitap02, baitap03, baitap04);
-}
-btnBaiTap02.onclick = () => {
-    document.getElementById('baitap02').classList.toggle('active');
-    removeActive(baitap01, baitap03, baitap04);
-}
-btnBaiTap03.onclick = () => {
-    document.getElementById('baitap03').classList.toggle('active');
-    removeActive(baitap01, baitap02, baitap04);
-}
-btnBaiTap04.onclick = () => {
-    document.getElementById('baitap04').classList.toggle('active');
-    removeActive(baitap01, baitap02, baitap03);
-}
+        let iconActive = item.querySelector('#icon-book');
+        if(item.classList.contains('active')){
+            iconActive.classList.replace('fa-book', 'fa-book-open');
+        } else {
+            iconActive.classList.replace('fa-book-open', 'fa-book');
+        }
+        removeActive(index);
 
-function removeActive(idActive1, idActive2, idActive3){
-    idActive1.classList.remove('active');
-    idActive2.classList.remove('active');
-    idActive3.classList.remove('active');
+        // hiển thị nội dung bài tập tương ứng khi user click vào button
+        showBaiTap.forEach((item2, index2) => {
+            item2.classList.toggle('active');
+            if(index != index2) item2.classList.remove('active');
+        })
+
+    })
+})
+
+// function xóa class active khi user click button khác đồng thời thay đổi icon book
+function removeActive(index1){
+    btnActive.forEach((item2, index2) => {
+        if(index1 != index2){
+            item2.classList.remove('active');
+
+            let iconActive = item2.querySelector('#icon-book');
+            iconActive.classList.replace('fa-book-open', 'fa-book');
+            
+        }
+    })
 }
