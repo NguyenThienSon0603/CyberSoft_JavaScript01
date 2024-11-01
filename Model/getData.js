@@ -3,6 +3,18 @@ import {tinhTienDien} from '../Controller/processingData.js';
 import {tinhThue} from '../Controller/processingData.js';
 import {tinhTienCap} from '../Controller/processingData.js';
 
+// format đơn vị tiền tệ VNĐ
+const VND = new Intl.NumberFormat('vi-VN', {
+    style: 'currency',
+    currency: 'VND',
+});
+
+// format đơn vị tiền tệ Dollar
+const USD = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
+
 // ============================================== BÀI TẬP 01 =========================================================================================
 document.getElementById('qlts').onsubmit = (e) => {
     // chặn reload trang khi có sự kiện onsubmit
@@ -34,8 +46,8 @@ document.getElementById('qlts').onsubmit = (e) => {
 document.getElementById('tinhTienDien').onsubmit = (e) => {
     e.preventDefault();
     const soKi = document.getElementById('txtSoKiDien').value;
-    const ttTienDien = new tinhTienDien(soKi);
-    document.getElementById('kqTongTien').innerHTML = ttTienDien.tinhTien() + ' VND';
+    const ttTienDien = new tinhTienDien(soKi).tinhTien();
+    document.getElementById('kqTongTien').innerHTML = VND.format(ttTienDien).replace('₫','VNĐ');
 }
 
 // ============================================== BÀI TẬP 03 =========================================================================================
@@ -50,10 +62,10 @@ document.getElementById('tinhThue').onsubmit = (e) => {
     const thuNhapChiuThue = tinhThueCaNhan.thuNhapChiuThue();
 
     document.getElementById('hoTen').innerHTML = hoTen;
-    document.getElementById('tongThuNhapNam').innerHTML = tongThuNhapNam;
+    document.getElementById('tongThuNhapNam').innerHTML = VND.format(tongThuNhapNam).replace('₫','VNĐ');
     document.getElementById('soNguoiPhuThuoc').innerHTML = soNguoiPhuThuoc;
-    document.getElementById('tongThuNhapChiuThue').innerHTML = thuNhapChiuThue;
-    document.getElementById('tongThuePhaiDong').innerHTML = parseInt(thueSuat);
+    document.getElementById('tongThuNhapChiuThue').innerHTML = VND.format(thuNhapChiuThue).replace('₫','VNĐ');
+    document.getElementById('tongThuePhaiDong').innerHTML = VND.format(parseInt(thueSuat)).replace('₫','VNĐ');
 }
 // ============================================== BÀI TẬP 04 =========================================================================================
 document.getElementById('txtLoaiKH').addEventListener('change', () => {
@@ -87,5 +99,5 @@ document.getElementById('tinhTienCap').onsubmit = (e) => {
     document.getElementById('loaiKH').innerHTML = tenLoaiKH;
     document.getElementById('soKN').innerHTML = soKN;
     document.getElementById('soKenh').innerHTML = soKenh;
-    document.getElementById('tongTien').innerHTML = hdThanhToan + '$';
+    document.getElementById('tongTien').innerHTML = USD.format(hdThanhToan);
 }
